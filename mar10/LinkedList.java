@@ -1,4 +1,3 @@
-package mar10;
 
 // a dual-direction linked list
 public class LinkedList {

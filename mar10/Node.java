@@ -1,4 +1,3 @@
-package mar10;
 
 public class Node {
 	int data;
