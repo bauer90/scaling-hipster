@@ -9,5 +9,4 @@ Java version
 - feb19: Chapter 1
 - mar10: Chapter 2
 - mar19: Chapter 3 (under Eclipse)
-- 
 
