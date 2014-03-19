@@ -1,6 +1,6 @@
 scaling-hipster
 ===============
-A self-maintained solution set for CTCI in Java.
+*A self-maintained solution set for CTCI in Java.*
 
 ###Contents
 - feb19: Chapter 1
