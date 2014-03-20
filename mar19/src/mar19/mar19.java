@@ -14,5 +14,8 @@ public class mar19 {
         //System.out.println(stack.num_total_occupied());
         stack.print_head_info();
         System.out.println(stack.toString());
+        int res = stack.pop_from(2);
+        System.out.println(stack.toString() + " " + res);
+        stack.print_head_info();
     }
 }
