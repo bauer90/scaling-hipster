@@ -35,7 +35,7 @@ public class MinValueStack {
     }
     
     public int get_min() {
-        return main_stack.is_empty() ? Integer.MAX_VALUE : min_stack.peak();
+        return main_stack.is_empty() ? Integer.MAX_VALUE : min_stack.peek();
     }
     
     

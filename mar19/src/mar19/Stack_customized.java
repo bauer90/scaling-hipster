@@ -41,7 +41,7 @@ public class Stack_customized {
         this.num_occupied ++;
     }
     
-    public int peak() {
+    public int peek() {
         if (this.is_empty()) {
             System.out.println("Error: peek() called on an empty stack.");
             return -1;
