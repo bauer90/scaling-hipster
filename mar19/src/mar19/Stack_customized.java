@@ -1,8 +1,8 @@
 package mar19;
 
 public final class Stack_customized {
-    private int num_occupied;
     private int[] arr;
+    private int num_occupied;
     private int length_arr;
     
     public Stack_customized(int size) 

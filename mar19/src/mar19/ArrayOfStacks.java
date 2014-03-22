@@ -2,7 +2,7 @@ package mar19;
 
 public final class ArrayOfStacks 
 {
-    public Stack_customized[] array_of_stacks;
+    private Stack_customized[] array_of_stacks;
     private int length_of_array;
     private int current_stack;
     
@@ -21,8 +21,8 @@ public final class ArrayOfStacks
     
     public boolean is_full() 
     {
-        return (this.current_stack >= this.length_of_array - 1) 
-                && (array_of_stacks[this.current_stack].get_num_occupied() >= array_of_stacks[this.current_stack].get_size());
+        return (current_stack >= length_of_array - 1) 
+                && (array_of_stacks[current_stack].get_num_occupied() >= array_of_stacks[current_stack].get_size());
     }
     
     public boolean is_empty() 
@@ -60,6 +60,8 @@ public final class ArrayOfStacks
     {
         if (this.is_full())
             this.resize();
+        if (array_of_stacks[current_stack].is_full())
+            this.current_stack ++;
         this.array_of_stacks[this.current_stack].push(val);
     }
     
