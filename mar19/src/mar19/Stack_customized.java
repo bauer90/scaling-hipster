@@ -1,6 +1,6 @@
 package mar19;
 
-public class Stack_customized {
+public final class Stack_customized {
     private int num_occupied;
     private int[] arr;
     private int length_arr;
@@ -12,6 +12,23 @@ public class Stack_customized {
         for (int i = 0; i < size; i++) {
             this.arr[i] = 0;
         }
+    }
+    
+    // copy constructor
+    public Stack_customized(Stack_customized other) {
+        this.num_occupied = other.get_num_occupied();
+        this.length_arr = other.get_length_arr();
+        for (int i = 0; i < other.get_length_arr(); i++) {
+            this.arr[i] = other.arr[i];
+        }
+    }
+    
+    public int get_num_occupied() {
+        return this.num_occupied;
+    }
+    
+    public int get_length_arr() {
+        return this.length_arr;
     }
     
     public boolean is_empty() {
@@ -58,7 +75,6 @@ public class Stack_customized {
         for (int i = this.num_occupied; i < this.length_arr; i++) {
             sb.append("_ ");
         }
-        return sb.toString();
-        
+        return sb.toString();   
     }
 }
