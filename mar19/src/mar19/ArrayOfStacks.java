@@ -15,8 +15,8 @@ public final class ArrayOfStacks
         }
         array_of_stacks = new Stack_customized[1];
         array_of_stacks[0] = new Stack_customized(height_stack);
-        this.length_of_array = 1;
-        this.current_stack = 0;
+        length_of_array = 1;
+        current_stack = 0;
     }
     
     public boolean is_full() 
@@ -27,21 +27,21 @@ public final class ArrayOfStacks
     
     public boolean is_empty() 
     {
-        return (this.current_stack <= 0) && (array_of_stacks[0].get_num_occupied() <= 0);
+        return (current_stack <= 0) && (array_of_stacks[0].get_num_occupied() <= 0);
     }
     
     // expand the array to 2x of its original size.
     // useful when push() is called and is_full() returns true.
     private void resize() 
     {
-        Stack_customized[] temp = new Stack_customized[2 * this.length_of_array];
-        for (int i = 0; i < this.length_of_array; i++)
-            temp[i] = new Stack_customized(this.array_of_stacks[i]); // calling Stack_customized's copy constructor.
-        for (int i = this.length_of_array; i < 2 * this.length_of_array; i++) 
-            temp[i] = new Stack_customized((this.array_of_stacks[0].get_size()));
-        this.array_of_stacks = temp;
-        this.length_of_array *= 2;
-        this.current_stack ++;
+        Stack_customized[] temp = new Stack_customized[2 * length_of_array];
+        for (int i = 0; i < length_of_array; i++)
+            temp[i] = new Stack_customized(array_of_stacks[i]); // calling Stack_customized's copy constructor.
+        for (int i = length_of_array; i < 2 * length_of_array; i++) 
+            temp[i] = new Stack_customized((array_of_stacks[0].get_size()));
+        array_of_stacks = temp;
+        length_of_array *= 2;
+        current_stack ++;
     }
     
     public int pop() 
@@ -50,9 +50,9 @@ public final class ArrayOfStacks
             System.out.println("Error: attempting to pop() from an empty ArrayOfStacks.");
             return -1;
         }
-        int result = this.array_of_stacks[this.current_stack].pop();
-        if (this.array_of_stacks[this.current_stack].get_num_occupied() == 0)
-            this.current_stack --;
+        int result = array_of_stacks[current_stack].pop();
+        if (this.array_of_stacks[current_stack].get_num_occupied() == 0)
+            current_stack --;
         return result;
     }
     
@@ -61,18 +61,17 @@ public final class ArrayOfStacks
         if (this.is_full())
             this.resize();
         if (array_of_stacks[current_stack].is_full())
-            this.current_stack ++;
-        this.array_of_stacks[this.current_stack].push(val);
+            current_stack ++;
+        array_of_stacks[current_stack].push(val);
     }
     
     public String toString()
     {
         StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < this.length_of_array; i++) {
+        for (int i = 0; i < length_of_array; i++) {
             sb.append(array_of_stacks[i].toString());
             sb.append("\n");
         }
         return sb.toString();
     }
-    
 }
