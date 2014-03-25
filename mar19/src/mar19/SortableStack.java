@@ -80,16 +80,15 @@ public class SortableStack
         }
     }
     /* returns a sorted copy of stack_1 */
-    public Stack_customized sort()
+    public void sort()
     {
         int num_occupied = stack_1.get_num_occupied();
         Stack_customized result = new Stack_customized(stack_1.get_size());
         for(int i = 0; i < num_occupied; i++) {
-            System.out.println("");
             result.push(get_element_at(get_min_index()));
             remove_element_at(get_min_index());
         }
-        return result;
+        stack_1 = result;
     }
     
     public int pop() 
