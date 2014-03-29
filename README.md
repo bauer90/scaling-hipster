@@ -6,6 +6,7 @@ scaling-hipster
 - feb19: Chapter 1
 - mar10: Chapter 2
 - mar19: Chapter 3 (under Eclipse)
+- mar29: Chapter 4 (under Eclipse)
 
 ###Log
 3/14/2014 Updated thru 2.6  
