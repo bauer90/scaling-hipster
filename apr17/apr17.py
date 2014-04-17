@@ -1,14 +1,6 @@
 # implements 'substitution' operation using only 'addition'
-
 def sub_using_add(a, b):
 	return a + negate_using_add(b)
-
-# absolute value
-def my_abs(a):
-	if a >= 0:
-		return a
-	else:
-		return negate_using_add(a)
 
 # implements 'multiplication' operation using only 'addition'
 def mult_using_add(a, b):
@@ -17,7 +9,7 @@ def mult_using_add(a, b):
 	abs_b = my_abs(b)
 	for i in range(0, abs_b):
 		result += abs_a
-	if ((a > 0 and b > 0) or (a < 0 and b < 0)):
+	if (a > 0 and b > 0) or (a < 0 and b < 0):
 		return result
 	else:
 		return negate_using_add(result)
@@ -35,6 +27,15 @@ def div_using_add(a, b):
 		return result
 	else:
 		return negate_using_add(result)
+
+# UTILITY FUNCTIONS ---
+
+# absolute value
+def my_abs(a):
+	if a >= 0:
+		return a
+	else:
+		return negate_using_add(a)
 
 # turns a positive number to negative using only 'addition'
 # (not sure if it's legit: number -1 used somewhere)
