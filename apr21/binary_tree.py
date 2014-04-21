@@ -1,3 +1,5 @@
+import random as rd
+
 class BinaryNode:
     left, right, data, parent = None, None, 0, None
 
@@ -6,6 +8,12 @@ class BinaryNode:
         self.right = None
         self.data = _data
         self.parent = None
+
+    def is_leaf(self):
+        return (self.left == None) and (self.right == None)
+
+    def print_info(self):
+        print 'data =', self.data, 'parent = ', self.parent.data
 
 class BinaryTree:
     root = None
@@ -46,3 +54,36 @@ class BinaryTree:
                         continue
         return
 
+    def val_exist(self, _val):
+        if self.is_empty():
+            return False
+        cur = self.root
+        while 1:
+            if cur.data == _val:
+                return True
+            elif cur.left != None and _val < cur.data:
+                cur = cur.left
+            elif cur.right != None and _val > cur.data:
+                cur = cur.right
+            else:
+                return False
+        return False
+
+    def print_all_nodes(self, _root):
+        if _root == None:
+            pass
+        elif _root.is_leaf():
+            _root.print_info()
+        else:
+            self.print_all_nodes(_root.left)
+            _root.print_info()
+            self.print_all_nodes(_root.right)
+
+    def print_tree(self):
+        self.print_all_nodes(self.root)
+
+    def insert_randoms(self, _num):
+        rd.seed()
+        for i in range(0, _num):
+            self.insert(int(rd.random() * 100))
+        
