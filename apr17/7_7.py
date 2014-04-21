@@ -49,9 +49,3 @@ def kth_better(k):
         val = remove_min_from(lst)
         add_mults_to(val, lst)
     return val
-
-
-
-
-
-
