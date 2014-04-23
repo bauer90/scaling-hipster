@@ -10,15 +10,12 @@ class BinaryNode:
         self.parent = None
 
     def is_leaf(self):
-        return (self.left == None) and (self.right == None)
+        return (self.left is None) and (self.right is None)
 
     def print_info(self):
         print 'data =', self.data, 'parent = ', self.parent.data
 
 class BinaryTree:
-    root = None
-    size = 0
-
     def __init__(self):
         self.root = None
         self.size = 0
@@ -35,7 +32,7 @@ class BinaryTree:
             cur = self.root
             while 1:
                 if _data < cur.data:
-                    if cur.left == None:
+                    if cur.left is None:
                         cur.left = BinaryNode(_data)
                         cur.left.parent = cur
                         self.size += 1
@@ -44,7 +41,7 @@ class BinaryTree:
                         cur = cur.left
                         continue
                 else:
-                    if cur.right == None:
+                    if cur.right is None:
                         cur.right = BinaryNode(_data)
                         cur.right.parent = cur
                         self.size += 1
@@ -61,16 +58,16 @@ class BinaryTree:
         while 1:
             if cur.data == _val:
                 return True
-            elif cur.left != None and _val < cur.data:
+            elif (cur.left is not None) and (_val < cur.data):
                 cur = cur.left
-            elif cur.right != None and _val > cur.data:
+            elif (cur.right is not None) and (_val > cur.data):
                 cur = cur.right
             else:
                 return False
         return False
 
     def print_all_nodes(self, _root):
-        if _root == None:
+        if _root is None:
             pass
         elif _root.is_leaf():
             _root.print_info()
