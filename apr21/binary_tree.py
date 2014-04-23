@@ -1,4 +1,5 @@
-import random as rd
+import random as rand
+import sys
 
 class BinaryNode:
     left, right, data, parent = None, None, 0, None
@@ -15,6 +16,51 @@ class BinaryNode:
     def print_info(self):
         print 'data =', self.data, 'parent = ', self.parent.data
 
+    def suc_node(self, tree):
+        if self.right is not None:
+            return self.right.min_val()
+        elif tree.tree_max_val() == self.data:
+            return self.data
+        else:
+            cur = self
+            par = self.parent
+            while (par is not cur) and (par.right is cur):
+                cur = cur.parent
+                par = cur.parent
+            return par.data
+
+    def pre_node(self, tree): #symmetric with suc_node()
+        if self.left is not None:
+            return self.left.max_val()
+        elif tree.tree_min_val() == self.data:
+            return self.data
+        else:
+            cur = self
+            par = self.parent
+            while (par is not cur) and (par.left is cur):
+                cur = cur.parent
+                par = cur.parentn
+            return par.data
+
+    def max_val(self):
+        if self is None:
+            return - sys.maxint - 1
+        else:
+            cur = self
+            while cur.right is not None:
+                cur = cur.right
+            return cur.data
+
+    def min_val(self):
+        if self is None:
+            return sys.maxint
+        else:
+            cur = self
+            while cur.left is not None:
+                cur = cur.left
+            return cur.data
+
+
 class BinaryTree:
     def __init__(self):
         self.root = None
@@ -24,7 +70,10 @@ class BinaryTree:
         return self.size == 0
 
     def insert(self, _data):
-        if self.is_empty():
+        if self.val_exist(_data):
+            print 'val exists already.'
+            return
+        elif self.is_empty():
             self.root = BinaryNode(_data)
             self.root.parent = self.root
             self.size += 1
@@ -39,7 +88,6 @@ class BinaryTree:
                         break
                     else:
                         cur = cur.left
-                        continue
                 else:
                     if cur.right is None:
                         cur.right = BinaryNode(_data)
@@ -48,8 +96,13 @@ class BinaryTree:
                         break
                     else:
                         cur = cur.right
-                        continue
         return
+
+    def tree_max_val(self):
+        return self.root.max_val()
+
+    def tree_min_val(self):
+        return self.root.min_val()
 
     def val_exist(self, _val):
         if self.is_empty():
@@ -80,7 +133,7 @@ class BinaryTree:
         self.print_all_nodes(self.root)
 
     def insert_randoms(self, _num):
-        rd.seed()
+        rand.seed()
         for i in range(0, _num):
-            self.insert(int(rd.random() * 100))
+            self.insert(int(rand.random() * 100))
         
