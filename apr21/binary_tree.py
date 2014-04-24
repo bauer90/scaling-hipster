@@ -14,7 +14,16 @@ class BinaryNode:
         return (self.left is None) and (self.right is None)
 
     def print_info(self):
-        print 'data =', self.data, 'parent = ', self.parent.data
+        s = 'data = ' + str(self.data) + ' | parent = ' + str(self.parent.data)
+        if self.left is not None:
+            s += ' | left = ' + str(self.left.data)
+        else:
+            s += ' | no left child '
+        if self.right is not None:
+            s += ' | right = ' + str(self.right.data)
+        else:
+            s += ' | no right child '
+        print s
 
     def suc_node(self, tree):
         if self.right is not None:
@@ -74,6 +83,9 @@ class BinaryNode:
             self.left.insert_recur(_val)
         else: # -> (_val > self.data) and (self.right is not None)
             self.right.insert_recur(_val)
+
+    def delete_node(self):
+        pass
 
 
 class BinaryTree:
@@ -137,7 +149,7 @@ class BinaryTree:
             elif (cur.right is not None) and (_val > cur.data):
                 cur = cur.right
             else:
-                return False
+                break
         return False
 
     def print_all_nodes(self, _root):
