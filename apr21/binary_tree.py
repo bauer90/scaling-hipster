@@ -10,7 +10,7 @@ class BinaryNode:
         self.parent = None
 
     def is_leaf(self):
-        return (self.left == None) and (self.right == None)
+        return (self.left is None) and (self.right is None)
 
     def print_info(self):
         print 'data =', self.data, 'parent = ', self.parent.data
@@ -35,7 +35,7 @@ class BinaryTree:
             cur = self.root
             while 1:
                 if _data < cur.data:
-                    if cur.left == None:
+                    if cur.left is None:
                         cur.left = BinaryNode(_data)
                         cur.left.parent = cur
                         self.size += 1
@@ -44,7 +44,7 @@ class BinaryTree:
                         cur = cur.left
                         continue
                 else:
-                    if cur.right == None:
+                    if cur.right is None:
                         cur.right = BinaryNode(_data)
                         cur.right.parent = cur
                         self.size += 1
@@ -53,6 +53,12 @@ class BinaryTree:
                         cur = cur.right
                         continue
         return
+
+    def delete(self, _node):
+        pass
+
+
+        
 
     def val_exist(self, _val):
         if self.is_empty():
@@ -70,7 +76,7 @@ class BinaryTree:
         return False
 
     def print_all_nodes(self, _root):
-        if _root == None:
+        if _root is None:
             pass
         elif _root.is_leaf():
             _root.print_info()
