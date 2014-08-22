@@ -1,4 +1,5 @@
-import random as rd
+import random as rand
+import sys
 
 class BinaryNode:
     left, right, data, parent = None, None, 0, None
@@ -13,24 +14,94 @@ class BinaryNode:
         return (self.left is None) and (self.right is None)
 
     def print_info(self):
-        print 'data =', self.data, 'parent = ', self.parent.data
+        s = 'data = ' + str(self.data) + ' | parent = ' + str(self.parent.data)
+        if self.left is not None:
+            s += ' | left = ' + str(self.left.data)
+        else:
+            s += ' | no left child '
+        if self.right is not None:
+            s += ' | right = ' + str(self.right.data)
+        else:
+            s += ' | no right child '
+        print s
+
+    def suc_node(self, tree):
+        if self.right is not None:
+            return self.right.min_val()
+        elif tree.tree_max_val() == self.data:
+            return self.data
+        else:
+            cur = self
+            par = self.parent
+            while (par is not cur) and (par.right is cur):
+                cur = cur.parent
+                par = cur.parent
+            return par.data
+
+    def pre_node(self, tree): #symmetric with suc_node()
+        if self.left is not None:
+            return self.left.max_val()
+        elif tree.tree_min_val() == self.data:
+            return self.data
+        else:
+            cur = self
+            par = self.parent
+            while (par is not cur) and (par.left is cur):
+                cur = cur.parent
+                par = cur.parentn
+            return par.data
+
+    def max_val(self):
+        if self is None:
+            return - sys.maxint - 1
+        else:
+            cur = self
+            while cur.right is not None:
+                cur = cur.right
+            return cur.data
+
+    def min_val(self):
+        if self is None:
+            return sys.maxint
+        else:
+            cur = self
+            while cur.left is not None:
+                cur = cur.left
+            return cur.data
+
+    # will be called as a utility function in 
+    # BinaryTree class. val_exist() inspection 
+    # will be done there.
+    def insert_recur(self, _val):
+        if (_val <= self.data) and (self.left is None):
+            self.left = BinaryNode(_val)
+            self.left.parent = self
+        elif (_val > self.data) and (self.right is None):
+            self.right = BinaryNode(_val)
+            self.right.parent = self
+        elif (_val <= self.data) and (self.left is not None):
+            self.left.insert_recur(_val)
+        else: # -> (_val > self.data) and (self.right is not None)
+            self.right.insert_recur(_val)
+
+    def delete_node(self):
+        pass
+
 
 class BinaryTree:
-    root = None
-    size = 0
-
     def __init__(self):
         self.root = None
-        self.size = 0
 
     def is_empty(self):
-        return self.size == 0
+        return self.root is None
 
     def insert(self, _data):
-        if self.is_empty():
+        if self.val_exist(_data):
+            print 'val exists already.'
+            return
+        elif self.is_empty():
             self.root = BinaryNode(_data)
             self.root.parent = self.root
-            self.size += 1
         else:
             cur = self.root
             while 1:
@@ -38,27 +109,41 @@ class BinaryTree:
                     if cur.left is None:
                         cur.left = BinaryNode(_data)
                         cur.left.parent = cur
-                        self.size += 1
                         break
                     else:
                         cur = cur.left
-                        continue
                 else:
                     if cur.right is None:
                         cur.right = BinaryNode(_data)
                         cur.right.parent = cur
-                        self.size += 1
                         break
                     else:
                         cur = cur.right
-                        continue
         return
 
+<<<<<<< HEAD
     def delete(self, _node):
         pass
 
 
         
+=======
+    def insert_recursive(self, _data):
+        if self.val_exist(_data):
+            print 'val exists already'
+            return
+        elif self.is_empty():
+            self.root = BinaryNode(_data)
+            self.root.parent = self.root
+        else:
+            self.root.insert_recur(_data)
+
+    def tree_max_val(self):
+        return self.root.max_val()
+
+    def tree_min_val(self):
+        return self.root.min_val()
+>>>>>>> FETCH_HEAD
 
     def val_exist(self, _val):
         if self.is_empty():
@@ -67,12 +152,12 @@ class BinaryTree:
         while 1:
             if cur.data == _val:
                 return True
-            elif cur.left != None and _val < cur.data:
+            elif (cur.left is not None) and (_val < cur.data):
                 cur = cur.left
-            elif cur.right != None and _val > cur.data:
+            elif (cur.right is not None) and (_val > cur.data):
                 cur = cur.right
             else:
-                return False
+                break
         return False
 
     def print_all_nodes(self, _root):
@@ -89,7 +174,7 @@ class BinaryTree:
         self.print_all_nodes(self.root)
 
     def insert_randoms(self, _num):
-        rd.seed()
+        rand.seed()
         for i in range(0, _num):
-            self.insert(int(rd.random() * 100))
+            self.insert_recursive(int(rand.random() * 100))
         
